@@ -1,5 +1,5 @@
 class GoalSerializer < ActiveModel::Serializer
- attributes :id, :name, :category, :user_id 
+ attributes :id, :name, :category, :user_id, :actions 
 
  # def user_id 
  #   self.user_id.name 

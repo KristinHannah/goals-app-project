@@ -2,9 +2,21 @@ class Goals {
     constructor() {
         this.goals = []
         this.adapter = new GoalsAdapter()
-        // this.bindEventListeners()
+        this.initBindingsAndEventListeners()
         this.fetchAndLoadGoals()
     }
+
+    initBindingsAndEventListeners() {
+        this.goalsContainer = document.getElementById('goals-container')
+        this.goalForm = document.getElementById('new-goal-form')
+        this.goalForm.addEventListener('submit', this.createGoal)
+    }
+
+    createGoal(e) {
+        e.preventDefault()
+        console.log('goal is being created')
+    }
+
 
     fetchAndLoadGoals() {
         this.adapter.getGoals()
@@ -19,7 +31,7 @@ class Goals {
 
     render() {
         const goalsContainer = document.getElementById('goals-container')
-        goalsContainer.innerHTML = ' my goals here '
+        goalsContainer.innerHTML = this.goals.map(goal => goal.renderLi()).join('')
     }
 
 }
