@@ -7,10 +7,14 @@ class Goals {
     }
 
     fetchAndLoadGoals() {
-        this.adapter.getGoals().then(goals => {
-            goals.forEach(goal => this.goals.push(goal))
-        })
-            .then(() => { this.render() })
+        this.adapter.getGoals()
+            .then(goals => {
+                goals.forEach(goal => this.goals.push(new Goal(goal)))
+                console.log(this.goals)
+            })
+            .then(() => {
+                this.render()
+            })
     }
 
     render() {
