@@ -1,3 +1,6 @@
+
+const app = new App()
+
 document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM content has loaded")
   let url = "http://localhost:3000/api/v1/goals/index"
