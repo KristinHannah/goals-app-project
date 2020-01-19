@@ -1,4 +1,4 @@
-class Api::v1::GoalsController < ApplicationController
+class Api::V1::GoalsController < ApplicationController
 
   def index
     @goals = Goal.all 
@@ -30,7 +30,7 @@ class Api::v1::GoalsController < ApplicationController
     render json: {goalId: @goal.id}
   end 
 
-  
+
   private 
 
   def goal_params 
