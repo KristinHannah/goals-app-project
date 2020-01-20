@@ -17,9 +17,11 @@ class Goals {
 
     createGoal(e) {
         e.preventDefault()
-        const value = this.newGoalBody.value
+        const nameValue = this.newGoalBody.value
+        const catValue = this.newGoalCat.value
+        const userValue = parseInt(this.newGoalUser.value)
 
-        this.adapter.createGoal(value).then(goal => {
+        this.adapter.createGoal(nameValue, catValue, userValue).then(goal => {
             this.goals.push(new Goal(goal))
             this.render()
         })

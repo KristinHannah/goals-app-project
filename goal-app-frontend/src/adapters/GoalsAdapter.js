@@ -7,9 +7,11 @@ class GoalsAdapter {
         return fetch(this.baseUrl).then(res => res.json())
     }
 
-    createGoal(value) {
+    createGoal(nameValue, catValue, userValue) {
         const goal = {
-            name: value
+            name: nameValue,
+            category: catValue,
+            user_id: userValue
         }
         return fetch(this.baseUrl, {
             method: 'POST',
