@@ -13,8 +13,11 @@ class GoalsAdapter {
         }
         return fetch(this.baseUrl, {
             method: 'POST',
-            name: JSON.stringify({ goal })
-        })
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({ goal })
+        }).then(res => res.json())
     }
 }
 

@@ -9,6 +9,8 @@ class Goals {
     initBindingsAndEventListeners() {
         this.goalsContainer = document.getElementById('goals-container')
         this.newGoalBody = document.getElementById('new-goal-body')
+        this.newGoalCat = document.getElementById('new-goal-cat')
+        this.newGoalUser = document.getElementById('new-goal-id')
         this.goalForm = document.getElementById('new-goal-form')
         this.goalForm.addEventListener('submit', this.createGoal.bind(this))
     }
@@ -17,7 +19,10 @@ class Goals {
         e.preventDefault()
         const value = this.newGoalBody.value
 
-        this.adapter.createGoal(value)
+        this.adapter.createGoal(value).then(goal => {
+            this.goals.push(new Goal(goal))
+            this.render()
+        })
     }
 
 
