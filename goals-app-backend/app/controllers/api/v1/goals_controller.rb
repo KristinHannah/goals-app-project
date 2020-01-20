@@ -13,6 +13,8 @@ class Api::V1::GoalsController < ApplicationController
 
   def create 
     @goal = Goal.create(goal_params)
+
+    render json: @goal, status: 200 
     #note.new, if note.save, render json 
   end 
 

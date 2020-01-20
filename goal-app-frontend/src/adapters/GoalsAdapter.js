@@ -13,13 +13,15 @@ class GoalsAdapter {
             category: catValue,
             user_id: userValue
         }
+
         return fetch(this.baseUrl, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
             },
-            body: JSON.stringify({ goal })
+            body: JSON.stringify({ goal }),
         }).then(res => res.json())
     }
+
 }
 

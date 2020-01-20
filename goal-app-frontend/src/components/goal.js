@@ -1,6 +1,6 @@
 class Goal {
     constructor(goalJSON) {
-        // this.id = goalJSON.id
+        this.id = goalJSON.id
         this.name = goalJSON.name
         this.category = goalJSON.category
         this.user_id = goalJSON.user_id
@@ -8,8 +8,23 @@ class Goal {
     }
 
     renderLi() {
-        return `<li> ${this.name} 
+        const formId = `new-action-for-${this.id}`
+        const nameId = `new-action-for-${this.id}`
+        const dateId = `new-date-for-${this.id}`
+        const goalId = `goal-id-for-${this.id}`
+
+        return `<li> ${this.name} </li> 
         <li> ${this.category} </li>
-        </li>`
+        <li> ${this.id} </li>
+        <form id= ${formId} > 
+            <p> Action: </p>
+            <input type="text" name="name" id= ${nameId} />
+            <br /> 
+            <p> Date: </p>
+            <input type="text" name="date" id= ${dateId} /> 
+            <input type="hidden" name="goal_id" id= ${goalId} value=${this.id} /> 
+            <input type='submit' /> 
+        </form>`
     }
 }
+
