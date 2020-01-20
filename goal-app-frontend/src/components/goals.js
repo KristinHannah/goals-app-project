@@ -8,13 +8,16 @@ class Goals {
 
     initBindingsAndEventListeners() {
         this.goalsContainer = document.getElementById('goals-container')
+        this.newGoalBody = document.getElementById('new-goal-body')
         this.goalForm = document.getElementById('new-goal-form')
-        this.goalForm.addEventListener('submit', this.createGoal)
+        this.goalForm.addEventListener('submit', this.createGoal.bind(this))
     }
 
     createGoal(e) {
         e.preventDefault()
-        console.log('goal is being created')
+        const value = this.newGoalBody.value
+
+        this.adapter.createGoal(value)
     }
 
 
