@@ -2,7 +2,7 @@ class Api::V1::GoalsController < ApplicationController
 
   def index
     @goals = Goal.all 
-    render json: @goals, status: 200 
+    render json: @goals, include: :actions 
   end
 
   def show 

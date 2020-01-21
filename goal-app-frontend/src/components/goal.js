@@ -15,7 +15,7 @@ class Goal {
 
         return `<li data-id=${this.id} data-name="name"> ${this.name} </li> 
         <li data-id=${this.id} data-name="category"> ${this.category} </li>
-        <li> actions: </li>
+        <li data-id=${this.id} data-name="actions"> actions: </li>
         <form id= ${formId} > 
             <p> Action: </p>
             <input type="text" name="name" id= ${nameId} />
