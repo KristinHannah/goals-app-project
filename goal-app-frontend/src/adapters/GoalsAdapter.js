@@ -23,5 +23,36 @@ class GoalsAdapter {
         }).then(res => res.json())
     }
 
+
+    // the following will have issues because of my more than one atts.
+    updateGoalName(value, id) {
+        const goal = {
+            name: value
+        }
+        //need a way to show multiple atts
+
+        return fetch(`${this.baseUrl}/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({ goal }),
+        }).then(res => res.json())
+    }
+
+    updateGoalCategory(value, id) {
+        const goal = {
+            category: value
+        }
+        //need a way to show multiple atts
+
+        return fetch(`${this.baseUrl}/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({ goal }),
+        }).then(res => res.json())
+    }
 }
 

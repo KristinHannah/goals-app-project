@@ -8,12 +8,14 @@ class Goals {
 
     initBindingsAndEventListeners() {
         this.goalsContainer = document.getElementById('goals-container')
+        this.body = document.querySelector('body')
         this.newGoalBody = document.getElementById('new-goal-body')
         this.newGoalCat = document.getElementById('new-goal-cat')
         this.newGoalUser = document.getElementById('new-goal-id')
         this.goalForm = document.getElementById('new-goal-form')
         this.goalForm.addEventListener('submit', this.createGoal.bind(this))
         this.goalsContainer.addEventListener('dblclick', this.handleGoalClick.bind(this))
+        this.body.addEventListener('blur', this.updateGoal.bind(this), true)
     }
 
     createGoal(e) {
@@ -28,8 +30,24 @@ class Goals {
         })
     }
 
-    handleGoalClick() {
+    handleGoalClick(e) {
+        const li = e.target
+        li.contentEditable = true
+        li.focus()
+        li.classList.add('editable')
+    }
 
+    updateGoal(e) {
+        const li = e.target
+        li.contentEditable = false
+        li.classList.remove('editable')
+        const newValue = li.innerHTML
+        const id = li.dataset.id
+        if (li.dataset.name === "name") {
+            this.adapter.updateGoalName(newValue, id)
+        } else if (li.dataset.name === "category") {
+            this.adapter.updateGoalCategory(newValue, id)
+        }
     }
 
     fetchAndLoadGoals() {

@@ -13,9 +13,8 @@ class Goal {
         const dateId = `new-date-for-${this.id}`
         const goalId = `goal-id-for-${this.id}`
 
-        return `<li contenteditable="true" > ${this.name} </li> 
-        <li contenteditable="true" > ${this.category} </li>
-        <li> ${this.id} </li>
+        return `<li data-id=${this.id} data-name="name"> ${this.name} </li> 
+        <li data-id=${this.id} data-name="category"> ${this.category} </li>
         <li> actions: </li>
         <form id= ${formId} > 
             <p> Action: </p>
