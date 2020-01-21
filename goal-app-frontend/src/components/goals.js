@@ -13,6 +13,7 @@ class Goals {
         this.newGoalUser = document.getElementById('new-goal-id')
         this.goalForm = document.getElementById('new-goal-form')
         this.goalForm.addEventListener('submit', this.createGoal.bind(this))
+        this.goalsContainer.addEventListener('dblclick', this.handleGoalClick.bind(this))
     }
 
     createGoal(e) {
@@ -27,6 +28,9 @@ class Goals {
         })
     }
 
+    handleGoalClick() {
+
+    }
 
     fetchAndLoadGoals() {
         this.adapter.getGoals()

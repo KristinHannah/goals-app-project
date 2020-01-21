@@ -4,7 +4,7 @@ class Goal {
         this.name = goalJSON.name
         this.category = goalJSON.category
         this.user_id = goalJSON.user_id
-        //  this.actions = goalJSON.actions
+        // this.actions = goalJSON.actions || []
     }
 
     renderLi() {
@@ -13,9 +13,10 @@ class Goal {
         const dateId = `new-date-for-${this.id}`
         const goalId = `goal-id-for-${this.id}`
 
-        return `<li> ${this.name} </li> 
-        <li> ${this.category} </li>
+        return `<li contenteditable="true" > ${this.name} </li> 
+        <li contenteditable="true" > ${this.category} </li>
         <li> ${this.id} </li>
+        <li> actions: </li>
         <form id= ${formId} > 
             <p> Action: </p>
             <input type="text" name="name" id= ${nameId} />
