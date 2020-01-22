@@ -14,6 +14,7 @@ class Goal {
                 this.actions.push(act)
             })
         }
+        console.log(this.actions)
     }
 
     renderLi() {
@@ -23,10 +24,23 @@ class Goal {
         const goalId = `goal-id-for-${this.id}`
         const classId = `${this.id}`
 
+        if (this.actions !== []) {
+            this.actions.forEach(item => {
+                const n = item.name;
+                const d = item.date;
+                const gId = item.goal_id;
+                `<ol > </ol> `
+
+            })
+        }
+
         return `<li data-id=${this.id} class=${classId} data-name="name"> ${this.name} </li> 
         <li data-id=${this.id} class=${classId} data-name="category"> ${this.category} </li>
         <br /> 
-        <li data-id=${this.id} class=${classId} data-name="actions"> actions: </li>
+        <li data-id=${this.id} class=${classId} data-name="actions"> actions: 
+            
+        </li>
+
         <form id= ${formId} class=${classId}> 
             <p> Action: </p>
             <input type="text" name="name" id= ${nameId} />
