@@ -29,7 +29,6 @@ class GoalsAdapter {
         const goal = {
             name: value
         }
-        //need a way to show multiple atts
 
         return fetch(`${this.baseUrl}/${id}`, {
             method: 'PATCH',
@@ -44,7 +43,6 @@ class GoalsAdapter {
         const goal = {
             category: value
         }
-        //need a way to show multiple atts
 
         return fetch(`${this.baseUrl}/${id}`, {
             method: 'PATCH',
@@ -54,5 +52,7 @@ class GoalsAdapter {
             body: JSON.stringify({ goal }),
         }).then(res => res.json())
     }
+
+
 }
 

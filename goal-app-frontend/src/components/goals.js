@@ -48,6 +48,7 @@ class Goals {
         } else if (li.dataset.name === "category") {
             this.adapter.updateGoalCategory(newValue, id)
         }
+        this.render()
     }
 
     fetchAndLoadGoals() {

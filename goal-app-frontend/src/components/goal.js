@@ -12,11 +12,13 @@ class Goal {
         const nameId = `new-action-for-${this.id}`
         const dateId = `new-date-for-${this.id}`
         const goalId = `goal-id-for-${this.id}`
+        const classId = `${this.id}`
 
-        return `<li data-id=${this.id} data-name="name"> ${this.name} </li> 
-        <li data-id=${this.id} data-name="category"> ${this.category} </li>
-        <li data-id=${this.id} data-name="actions"> actions: </li>
-        <form id= ${formId} > 
+        return `<li data-id=${this.id} class=${classId} data-name="name"> ${this.name} </li> 
+        <li data-id=${this.id} class=${classId} data-name="category"> ${this.category} </li>
+        <br /> 
+        <li data-id=${this.id} class=${classId} data-name="actions"> actions: </li>
+        <form id= ${formId} class=${classId}> 
             <p> Action: </p>
             <input type="text" name="name" id= ${nameId} />
             <br /> 

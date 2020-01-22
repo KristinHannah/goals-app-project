@@ -28,3 +28,7 @@ h1{
     border: 2px solid royalblue;
     padding: 20px;
 }
+
+.delete {
+    border: 1px dotted red;
+}
