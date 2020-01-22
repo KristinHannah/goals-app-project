@@ -38,7 +38,7 @@ class ActionsAdapter {
         }).then(res => res.json())
     }
 
-    updateActionCategory(value, id) {
+    updateActionDate(value, id) {
         const action = {
             date: value
         }
