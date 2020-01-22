@@ -14,7 +14,18 @@ class Goal {
                 this.actions.push(act)
             })
         }
-        console.log(this.actions)
+    }
+
+    creatingActionsList() {
+        const actionsArray = []
+        if (this.actions !== []) {
+            const actionsList = `<ol > </ol> `
+            this.actions.forEach(item => {
+                const actClass = `actions for ${this.id}`
+                actionsArray.push(`<li data-id=${this.id} class=${actClass} > completed ${item.name} on ${item.date} </li>`)
+            })
+            return actionsArray.join(' ')
+        }
     }
 
     renderLi() {
@@ -23,22 +34,13 @@ class Goal {
         const dateId = `new-date-for-${this.id}`
         const goalId = `goal-id-for-${this.id}`
         const classId = `${this.id}`
-
-        if (this.actions !== []) {
-            this.actions.forEach(item => {
-                const n = item.name;
-                const d = item.date;
-                const gId = item.goal_id;
-                `<ol > </ol> `
-
-            })
-        }
+        const actionsList = this.creatingActionsList()
 
         return `<li data-id=${this.id} class=${classId} data-name="name"> ${this.name} </li> 
         <li data-id=${this.id} class=${classId} data-name="category"> ${this.category} </li>
         <br /> 
         <li data-id=${this.id} class=${classId} data-name="actions"> actions: 
-            
+            <ol> ${actionsList} </ol>
         </li>
 
         <form id= ${formId} class=${classId}> 
