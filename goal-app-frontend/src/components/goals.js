@@ -3,6 +3,7 @@ class Goals {
     constructor() {
         this.goals = []
         this.adapter = new GoalsAdapter()
+        this.actionsAdapter = new ActionsAdapter()
         this.initBindingsAndEventListeners()
         this.fetchAndLoadGoals()
     }
@@ -17,7 +18,7 @@ class Goals {
         this.goalForm = document.getElementById('new-goal-form')
         this.goalForm.addEventListener('submit', this.createGoal.bind(this))
         this.goalsContainer.addEventListener('dblclick', this.handleGoalClick.bind(this))
-        this.body.addEventListener('blur', this.updateGoal.bind(this), true)
+        // this.body.addEventListener('blur', this.updateGoal.bind(this), true)
         //  this.buttonsArray = document.querySelectorAll('button')
         //  this.buttonsArray.forEach(function (elem) {
         //      elem.addEventListener("submit", function () {
@@ -37,8 +38,15 @@ class Goals {
 
     submitActionForm(e) {
         e.preventDefault()
-        const goalId = e.target.dataset.id
-        console.log(e.target)
+
+        const actionGoalId = e.target.dataset.id
+        const actionNameField = document.getElementById(`new-action-for-${actionGoalId}`)
+        const actionDateField = document.getElementById(`new-date-for-${actionGoalId}`)
+        const actionName = actionNameField.value
+        const actionDate = actionDateField.value
+        actionNameField.value = ''
+        actionDateField.value = ''
+
     }
 
     createGoal(e) {
