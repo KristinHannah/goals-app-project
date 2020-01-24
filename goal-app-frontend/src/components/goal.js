@@ -29,29 +29,28 @@ class Goal {
     }
 
     renderLi() {
-        const formId = `new-action-for-${this.id}`
         const nameId = `new-action-for-${this.id}`
         const dateId = `new-date-for-${this.id}`
         const goalId = `goal-id-for-${this.id}`
         const classId = `${this.id}`
+        const formId = `${this.id} action-form`
         const actionsList = this.creatingActionsList()
 
         return `<li data-id=${this.id} class=${classId} data-name="name"> ${this.name} </li> 
         <li data-id=${this.id} class=${classId} data-name="category"> ${this.category} </li>
         <br /> 
         <li data-id=${this.id} class=${classId} data-name="actions"> actions: 
-            <ol> ${actionsList} </ol>
-        </li>
-
-        <form id= ${formId} class=${classId}> 
+            <ol> ${actionsList} 
+            <li> 
+            Add New: <form id=${formId} class='action-form'> 
             <p> Action: </p>
             <input type="text" name="name" id= ${nameId} />
-            <br /> 
             <p> Date: </p>
             <input type="text" name="date" id= ${dateId} /> 
             <input type="hidden" name="goal_id" id= ${goalId} value=${this.id} /> 
             <input type='submit' /> 
-        </form>`
+        </form> </li> </ol>
+        </li>`
     }
 }
 

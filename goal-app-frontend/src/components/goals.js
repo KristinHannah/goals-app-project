@@ -1,10 +1,12 @@
 class Goals {
+
     constructor() {
         this.goals = []
         this.adapter = new GoalsAdapter()
         this.initBindingsAndEventListeners()
         this.fetchAndLoadGoals()
     }
+
 
     initBindingsAndEventListeners() {
         this.goalsContainer = document.getElementById('goals-container')
@@ -16,6 +18,27 @@ class Goals {
         this.goalForm.addEventListener('submit', this.createGoal.bind(this))
         this.goalsContainer.addEventListener('dblclick', this.handleGoalClick.bind(this))
         this.body.addEventListener('blur', this.updateGoal.bind(this), true)
+        //  this.buttonsArray = document.querySelectorAll('button')
+        //  this.buttonsArray.forEach(function (elem) {
+        //      elem.addEventListener("submit", function () {
+        //          this.showForm(elem)
+        //      })
+        //  })
+        //   this.actionForms = document.getElementsByClassName("action-form")
+        //  Array.from(this.actionForms).forEach((elem) => {
+        //     elem.addEventListener('submit', this.submitForm.bind(this), true)
+        // })
+        document.addEventListener('submit', function (event) {
+            if (event.target.classList.contains('action-form')) {
+                submitForm(event)
+            }
+        }, false);
+    }
+
+
+    submitForm(e) {
+        e.preventDefault()
+        console.log(e.target)
     }
 
     createGoal(e) {
@@ -23,7 +46,8 @@ class Goals {
         const nameValue = this.newGoalBody.value
         const catValue = this.newGoalCat.value
         const userValue = parseInt(this.newGoalUser.value)
-
+        this.newGoalBody.value = ''
+        this.newGoalCat.value = ''
         this.adapter.createGoal(nameValue, catValue, userValue).then(goal => {
             this.goals.push(new Goal(goal))
             this.render()

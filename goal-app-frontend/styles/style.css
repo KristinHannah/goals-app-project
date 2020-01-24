@@ -32,3 +32,8 @@ h1{
 .delete {
     border: 1px dotted red;
 }
+
+.action-form p {
+    font-size: 11px;
+    color: purple;
+}
