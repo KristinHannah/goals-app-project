@@ -42,12 +42,11 @@ class Goal {
         <li data-id=${this.id} class=${classId} data-name="actions"> actions: 
             <ol> ${actionsList} 
             <li> 
-            Add New: <form id=${formId} class='action-form'> 
+            Add New: <form id=${formId} class='action-form' data-id=${this.id}> 
             <p> Action: </p>
             <input type="text" name="name" id= ${nameId} />
             <p> Date: </p>
             <input type="text" name="date" id= ${dateId} /> 
-            <input type="hidden" name="goal_id" id= ${goalId} value=${this.id} /> 
             <input type='submit' /> 
         </form> </li> </ol>
         </li>`

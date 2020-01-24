@@ -28,16 +28,16 @@ class Goals {
         //  Array.from(this.actionForms).forEach((elem) => {
         //     elem.addEventListener('submit', this.submitForm.bind(this), true)
         // })
-        document.addEventListener('submit', function (event) {
-            if (event.target.classList.contains('action-form')) {
-                submitForm(event)
+        this.body.addEventListener('submit', (event) => {
+            if (event.target.className === 'action-form') {
+                this.submitActionForm(event)
             }
-        }, false);
+        });
     }
 
-
-    submitForm(e) {
+    submitActionForm(e) {
         e.preventDefault()
+        const goalId = e.target.dataset.id
         console.log(e.target)
     }
 
