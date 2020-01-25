@@ -22,7 +22,7 @@ class Goal {
         if (this.actions !== []) {
             const actionsList = `<ol > </ol> `
             this.actions.forEach(item => {
-                const actClass = `actions for ${this.id}`
+                const actClass = `completed-actions actions-for-${this.id}`
                 actionsArray.push(`<li data-goal_id=${this.id} data-id=${item.id} class=${actClass} data-name="action"> completed - ${item.name} - ${item.date} </li>`)
             })
             return actionsArray.join(' ')
@@ -49,7 +49,7 @@ class Goal {
         Actions: 
             <ol> ${actionsList} 
             <li> 
-            Add New: <form id=${formId} class='action-form' data-id=${this.id}> 
+            <p class="form-title"> Add New: </p> <form id=${formId} class='action-form' data-id=${this.id}> 
             <p> Action: </p>
             <input type="text" name="name" id= ${nameId} />
             <p> Date: </p>
