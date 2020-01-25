@@ -2,6 +2,7 @@ class ActionsAdapter {
     constructor() {
         this.baseUrl = 'http://localhost:3000/api/v1/actions'
     }
+
     getActions() {
         return fetch(this.baseUrl).then(res => res.json())
     }
@@ -13,6 +14,7 @@ class ActionsAdapter {
             goal_id: goalValue
         }
 
+        debugger
         return fetch(this.baseUrl, {
             method: 'POST',
             headers: {

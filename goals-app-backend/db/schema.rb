@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_18_211220) do
+ActiveRecord::Schema.define(version: 2020_01_25_000354) do
 
   create_table "actions", force: :cascade do |t|
     t.string "name"
-    t.date "date"
     t.integer "goal_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "date"
     t.index ["goal_id"], name: "index_actions_on_goal_id"
   end
 
