@@ -23,7 +23,7 @@ class Goal {
             const actionsList = `<ol > </ol> `
             this.actions.forEach(item => {
                 const actClass = `actions for ${this.id}`
-                actionsArray.push(`<li data-id=${this.id} class=${actClass} > completed ${item.name} on ${item.date} </li>`)
+                actionsArray.push(`<li data-goal_id=${this.id} data-id=${item.id} class=${actClass} data-name="action"> completed - ${item.name} - ${item.date} </li>`)
             })
             return actionsArray.join(' ')
         }

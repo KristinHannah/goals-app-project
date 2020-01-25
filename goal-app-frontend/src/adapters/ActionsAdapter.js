@@ -28,7 +28,7 @@ class ActionsAdapter {
 
     // the following will have issues because of my more than one atts.
     updateActionName(value, id) {
-        const action = {
+        const newAction = {
             name: value
         }
 
@@ -37,12 +37,12 @@ class ActionsAdapter {
             headers: {
                 'content-type': 'application/json',
             },
-            body: JSON.stringify({ action }),
+            body: JSON.stringify({ newAction }),
         }).then(res => res.json())
     }
 
     updateActionDate(value, id) {
-        const action = {
+        const newAction = {
             date: value
         }
 
@@ -51,7 +51,7 @@ class ActionsAdapter {
             headers: {
                 'content-type': 'application/json',
             },
-            body: JSON.stringify({ action }),
+            body: JSON.stringify({ newAction }),
         }).then(res => res.json())
     }
 
