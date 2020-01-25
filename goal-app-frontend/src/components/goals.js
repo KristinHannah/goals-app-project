@@ -86,13 +86,22 @@ class Goals {
         }
     }
 
+    confirmDelete() {
+        return confirm('are you sure you want to delete your goal or action?')
+    }
+
     updateNameOrDeleteGoal(newValue, id) {
         const idofG = parseInt(id)
         if (newValue === ' ' || newValue === '&nbsp;' || newValue === '') {
-            const removeIndex = this.goals.map(function (item) { return item.id; }).indexOf(idofG);
-            this.goals.splice(removeIndex, 1);
-            this.adapter.deleteGoal(id)
-            this.render()
+
+            if (this.confirmDelete() === true) {
+                const removeIndex = this.goals.map(function (item) { return item.id; }).indexOf(idofG);
+                this.goals.splice(removeIndex, 1);
+                this.adapter.deleteGoal(id)
+                this.render()
+            } else {
+                this.render()
+            }
         } else {
             this.adapter.updateGoalName(newValue, id)
                 .then(goal => {
@@ -106,10 +115,14 @@ class Goals {
     updateCatOrDeleteGoal(newValue, id) {
         const idofG = parseInt(id)
         if (newValue === ' ' || newValue === '&nbsp;' || newValue === '') {
-            const removeIndex = this.goals.map(function (item) { return item.id; }).indexOf(idofG);
-            this.goals.splice(removeIndex, 1);
-            this.adapter.deleteGoal(id)
-            this.render()
+            if (this.confirmDelete() === true) {
+                const removeIndex = this.goals.map(function (item) { return item.id; }).indexOf(idofG);
+                this.goals.splice(removeIndex, 1);
+                this.adapter.deleteGoal(id)
+                this.render()
+            } else {
+                this.render()
+            }
         } else {
             this.adapter.updateGoalCategory(newValue, id)
                 .then(goal => {
@@ -122,12 +135,17 @@ class Goals {
 
     updateOrDeleteAction(actionName, actionDate, id, goal_id) {
         if (actionName === ' ' || actionDate === ' ' || actionName === '&nbsp; ' || actionDate === '&nbsp; ') {
-            const goalOfAction = this.goals.find(x => x.id === goal_id)
-            const actionToUpdate = goalOfAction.actions
-            const removeIndex = actionToUpdate.map(function (item) { return item.id; }).indexOf(id);
-            actionToUpdate.splice(removeIndex, 1);
-            this.actionsAdapter.deleteAction(id)
-            this.render()
+            if (this.confirmDelete() === true) {
+                const goalOfAction = this.goals.find(x => x.id === goal_id)
+                const actionToUpdate = goalOfAction.actions
+                const removeIndex = actionToUpdate.map(function (item) { return item.id; }).indexOf(id);
+                actionToUpdate.splice(removeIndex, 1);
+                this.actionsAdapter.deleteAction(id)
+                this.render()
+            }
+            else {
+                this.render()
+            }
         } else {
             this.actionsAdapter.updateActionName(actionName, id).then(newAction => {
                 const goalOfAction = this.goals.find(x => x.id === goal_id)
