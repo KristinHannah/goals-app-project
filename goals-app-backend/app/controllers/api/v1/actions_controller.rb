@@ -7,10 +7,10 @@ class Api::V1::ActionsController < ApplicationController
     end 
 
     def create 
-      @action = Action.create(action_params)
-  
-      render json: @action, status: 200 
-      #note.new, if note.save, render json 
+      @action = Action.new(action_params)
+      if @action.save
+       render json: @action, status: 200 
+      end 
     end 
 
     def show 
