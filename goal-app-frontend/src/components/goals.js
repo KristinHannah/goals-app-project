@@ -36,7 +36,11 @@ class Goals {
         const actionDate = actionDateField.value
         actionNameField.value = ''
         actionDateField.value = ''
-        this.actionsAdapter.createAction(actionName, actionDate, actionGoalId)
+        this.actionsAdapter.createAction(actionName, actionDate, actionGoalId).then(newAction => {
+            const goalOfAction = this.goals.find(x => x.id === actionGoalId)
+            goalOfAction.actions.push(new Action(newAction))
+            this.render()
+        })
     }
 
     createGoal(e) {
