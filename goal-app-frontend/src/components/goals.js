@@ -37,7 +37,6 @@ class Goals {
         actionNameField.value = ''
         actionDateField.value = ''
         this.actionsAdapter.createAction(actionName, actionDate, actionGoalId)
-        this.render()
     }
 
     createGoal(e) {
