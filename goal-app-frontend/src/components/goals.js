@@ -18,7 +18,6 @@ class Goals {
         this.goalForm = document.getElementById('new-goal-form')
         this.goalForm.addEventListener('submit', this.createGoal.bind(this))
         this.goalsContainer.addEventListener('dblclick', this.handleGoalClick.bind(this))
-        // this.body.addEventListener('blur', this.updateGoal.bind(this), true)
         this.body.addEventListener('blur', (event) => {
             if (event.target.tagName === 'LI') {
                 this.updateGoal(event)

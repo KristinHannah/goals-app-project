@@ -23,7 +23,6 @@ class Api::V1::ActionsController < ApplicationController
       @action = Action.find(params[:id])
       @action.update(action_params)
       render json: @action, status: 200 
-      #if note.find, then note.update, etc. 
     end 
   
     def destroy 
