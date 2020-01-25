@@ -16,6 +16,7 @@ class Goal {
         }
     }
 
+
     creatingActionsList() {
         const actionsArray = []
         if (this.actions !== []) {

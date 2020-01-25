@@ -19,11 +19,16 @@ class Goals {
         this.goalForm.addEventListener('submit', this.createGoal.bind(this))
         this.goalsContainer.addEventListener('dblclick', this.handleGoalClick.bind(this))
         // this.body.addEventListener('blur', this.updateGoal.bind(this), true)
+        this.body.addEventListener('blur', (event) => {
+            if (event.target.tagName === 'LI') {
+                this.updateGoal(event)
+            }
+        }, true)
         this.body.addEventListener('submit', (event) => {
             if (event.target.className === 'action-form') {
                 this.submitActionForm(event)
             }
-        });
+        })
     }
 
     submitActionForm(e) {
@@ -71,10 +76,19 @@ class Goals {
         const id = li.dataset.id
         if (li.dataset.name === "name") {
             this.adapter.updateGoalName(newValue, id)
+                .then(goal => {
+                    const goalUpdate = this.goals.find(x => x.id === id)
+                    goalUpdate.name = goal.name
+                    this.render()
+                })
         } else if (li.dataset.name === "category") {
             this.adapter.updateGoalCategory(newValue, id)
+                .then(goal => {
+                    const goalUpdate = this.goals.find(x => x.id === id)
+                    goalUpdate.category = goal.category
+                    this.render()
+                })
         }
-        this.render()
     }
 
     fetchAndLoadGoals() {
