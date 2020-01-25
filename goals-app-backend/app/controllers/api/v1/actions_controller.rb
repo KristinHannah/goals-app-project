@@ -27,10 +27,10 @@ class Api::V1::ActionsController < ApplicationController
     end 
   
     def destroy 
-      @gaction = Action.find(params[:id])
+      @action = Action.find(params[:id])
       @action.delete 
   
-      render json: {actionId: @action.id}
+     render json: {actionId: @action.id}
     end 
   
   

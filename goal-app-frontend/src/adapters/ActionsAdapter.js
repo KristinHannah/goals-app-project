@@ -55,5 +55,12 @@ class ActionsAdapter {
         }).then(res => res.json())
     }
 
+    deleteAction(id) {
+
+        return fetch(`${this.baseUrl}/${id}`, {
+            method: 'DELETE'
+        })
+
+    }
 
 }

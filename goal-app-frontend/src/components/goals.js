@@ -75,24 +75,62 @@ class Goals {
         const newValue = li.innerHTML
         const id = li.dataset.id
         if (li.dataset.name === "name") {
+            this.updateNameOrDeleteGoal(newValue, id)
+        } else if (li.dataset.name === "category") {
+            this.updateCatOrDeleteGoal(newValue, id)
+        } else if (li.dataset.name === "action") {
+            const goal_id = parseInt(li.dataset.goal_id)
+            const actionData = newValue.split('-')
+            const actionName = actionData[1]
+            const actionDate = actionData[2]
+            this.updateOrDeleteAction(actionName, actionDate, id, goal_id)
+        }
+    }
+
+    updateNameOrDeleteGoal(newValue, id) {
+        const idofG = parseInt(id)
+        if (newValue === ' ' || newValue === '&nbsp;' || newValue === '') {
+            const removeIndex = this.goals.map(function (item) { return item.id; }).indexOf(idofG);
+            this.goals.splice(removeIndex, 1);
+            this.adapter.deleteGoal(id)
+            this.render()
+        } else {
             this.adapter.updateGoalName(newValue, id)
                 .then(goal => {
-                    const goalUpdate = this.goals.find(x => x.id === id)
+                    const goalUpdate = this.goals.find(x => x.id === idofG)
                     goalUpdate.name = goal.name
                     this.render()
                 })
-        } else if (li.dataset.name === "category") {
+        }
+    }
+
+    updateCatOrDeleteGoal(newValue, id) {
+        debugger
+        if (newValue === ' ' || newValue === '&nbsp;' || newValue === '') {
+            const idofG = parseInt(id)
+            const removeIndex = this.goals.map(function (item) { return item.id; }).indexOf(idofG);
+            this.goals.splice(removeIndex, 1);
+            this.adapter.deleteGoal(id)
+            this.render()
+        } else {
             this.adapter.updateGoalCategory(newValue, id)
                 .then(goal => {
                     const goalUpdate = this.goals.find(x => x.id === id)
                     goalUpdate.category = goal.category
                     this.render()
                 })
-        } else if (li.dataset.name === "action") {
-            const goal_id = li.dataset.goal_id
-            const actionData = newValue.split(' - ')
-            const actionName = actionData[1]
-            const actionDate = actionData[2]
+        }
+    }
+
+    updateOrDeleteAction(actionName, actionDate, id, goal_id) {
+        if (actionName === ' ' || actionDate === ' ' || actionName === '&nbsp; ' || actionDate === '&nbsp; ') {
+            const goalOfAction = this.goals.find(x => x.id === goal_id)
+            const actionToUpdate = goalOfAction.actions
+            const removeIndex = actionToUpdate.map(function (item) { return item.id; }).indexOf(id);
+            actionToUpdate.splice(removeIndex, 1);
+            this.actionsAdapter.deleteAction(id)
+            this.render()
+        } else {
             this.actionsAdapter.updateActionName(actionName, id).then(newAction => {
                 const goalOfAction = this.goals.find(x => x.id === goal_id)
                 const actionToUpdate = goalOfAction.actions.find(x => x.id === id)

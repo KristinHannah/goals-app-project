@@ -53,6 +53,13 @@ class GoalsAdapter {
         }).then(res => res.json())
     }
 
+    deleteGoal(id) {
+
+        return fetch(`${this.baseUrl}/${id}`, {
+            method: 'DELETE'
+        })
+
+    }
 
 }
 

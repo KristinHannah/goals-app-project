@@ -6,7 +6,7 @@ body {
 p{
     text-align: left;
     color: gray;
-    font-size: 20px;
+    font-size: 16px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
@@ -29,11 +29,29 @@ h1{
     padding: 20px;
 }
 
-.delete {
-    border: 1px dotted red;
-}
-
 .action-form p {
     font-size: 11px;
     color: purple;
+}
+
+li.goal-class{
+    border: 5px solid darkslateblue;
+    padding: 10px;
+    margin: 10px; 
+    list-style: none;
+}
+
+li.goal-class ul {
+    list-style: none;
+}
+
+
+li.goal-name{
+    font-size: 22px;
+    color: navy;
+}
+
+li.goal-cat{
+    font-size: 14px;
+    color: navy;
 }

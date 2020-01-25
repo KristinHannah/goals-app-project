@@ -34,13 +34,19 @@ class Goal {
         const dateId = `new-date-for-${this.id}`
         const goalId = `goal-id-for-${this.id}`
         const classId = `${this.id}`
+        const classForGoalName = `goal-name ${this.id}`
+        const classForGoalCat = `goal-cat ${this.id}`
         const formId = `${this.id} action-form`
         const actionsList = this.creatingActionsList()
 
-        return `<li data-id=${this.id} class=${classId} data-name="name"> ${this.name} </li> 
-        <li data-id=${this.id} class=${classId} data-name="category"> ${this.category} </li>
+        return `
+        <li class="goal-class"> 
+        <ul>
+        <li data-id=${this.id} class=${classForGoalName} data-name="name"> ${this.name} </li> 
+        <li data-id=${this.id} class=${classForGoalCat} data-name="category"> ${this.category} </li>
         <br /> 
-        <li data-id=${this.id} class=${classId} data-name="actions"> actions: 
+        <li data-id=${this.id} class=${classId} data-name="actions"> 
+        actions: 
             <ol> ${actionsList} 
             <li> 
             Add New: <form id=${formId} class='action-form' data-id=${this.id}> 
@@ -50,6 +56,8 @@ class Goal {
             <input type="text" name="date" id= ${dateId} /> 
             <input type='submit' /> 
         </form> </li> </ol>
+        </li>
+        </ul>
         </li>`
     }
 }
