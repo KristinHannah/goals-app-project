@@ -89,10 +89,22 @@ class Goals {
                     this.render()
                 })
         } else if (li.dataset.name === "action") {
+            const goal_id = li.dataset.goal_id
             const actionData = newValue.split(' - ')
             const actionName = actionData[1]
             const actionDate = actionData[2]
-            this.actionsAdapter.updateActionName(actionName, id)
+            this.actionsAdapter.updateActionName(actionName, id).then(newAction => {
+                const goalOfAction = this.goals.find(x => x.id === goal_id)
+                const actionToUpdate = goalOfAction.actions.find(x => x.id === id)
+                actionToUpdate.name = newAction.name
+                this.render()
+            })
+            this.actionsAdapter.updateActionDate(actionDate, id).then(newAction => {
+                const goalOfAction = this.goals.find(x => x.id === goal_id)
+                const actionToUpdate = goalOfAction.actions.find(x => x.id === id)
+                actionToUpdate.date = newAction.date
+                this.render()
+            })
         }
     }
 
