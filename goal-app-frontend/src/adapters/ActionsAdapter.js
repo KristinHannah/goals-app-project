@@ -1,4 +1,5 @@
 class ActionsAdapter {
+
     constructor() {
         this.baseUrl = 'http://localhost:3000/api/v1/actions'
     }
@@ -8,19 +9,19 @@ class ActionsAdapter {
     }
 
     createAction(nameValue, dateValue, goalValue) {
-        const action = {
+        const newAction = {
             name: nameValue,
             date: dateValue,
             goal_id: goalValue
         }
 
-        debugger
+
         return fetch(this.baseUrl, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
             },
-            body: JSON.stringify({ action }),
+            body: JSON.stringify({ newAction }),
         }).then(res => res.json())
     }
 

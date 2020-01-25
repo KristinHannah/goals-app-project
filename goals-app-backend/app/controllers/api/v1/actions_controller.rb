@@ -6,18 +6,17 @@ class Api::V1::ActionsController < ApplicationController
         render json: @actions, status: 200 
     end 
 
-
-    def show 
-      @action = Action.find(params[:id])
-  
-      render json: @action, status: 200 
-    end 
-  
     def create 
       @action = Action.create(action_params)
   
       render json: @action, status: 200 
       #note.new, if note.save, render json 
+    end 
+
+    def show 
+      @action = Action.find(params[:id])
+  
+      render json: @action, status: 200 
     end 
   
     def update 
@@ -38,7 +37,7 @@ class Api::V1::ActionsController < ApplicationController
     private 
   
     def action_params 
-      params.require(:action).permit(:name, :date, :goal_id)
+      params.require(:newAction).permit(:name, :date, :goal_id)
     end 
   
   end
