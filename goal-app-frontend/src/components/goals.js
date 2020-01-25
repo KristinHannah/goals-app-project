@@ -52,10 +52,9 @@ class Goals {
         e.preventDefault()
         const nameValue = this.newGoalBody.value
         const catValue = this.newGoalCat.value
-        const userValue = parseInt(this.newGoalUser.value)
         this.newGoalBody.value = ''
         this.newGoalCat.value = ''
-        this.adapter.createGoal(nameValue, catValue, userValue).then(goal => {
+        this.adapter.createGoal(nameValue, catValue).then(goal => {
             this.goals.push(new Goal(goal))
             this.render()
         })
@@ -105,9 +104,8 @@ class Goals {
     }
 
     updateCatOrDeleteGoal(newValue, id) {
-        debugger
+        const idofG = parseInt(id)
         if (newValue === ' ' || newValue === '&nbsp;' || newValue === '') {
-            const idofG = parseInt(id)
             const removeIndex = this.goals.map(function (item) { return item.id; }).indexOf(idofG);
             this.goals.splice(removeIndex, 1);
             this.adapter.deleteGoal(id)
@@ -115,7 +113,7 @@ class Goals {
         } else {
             this.adapter.updateGoalCategory(newValue, id)
                 .then(goal => {
-                    const goalUpdate = this.goals.find(x => x.id === id)
+                    const goalUpdate = this.goals.find(x => x.id === idofG)
                     goalUpdate.category = goal.category
                     this.render()
                 })

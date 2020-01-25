@@ -1,6 +1,7 @@
 body {
     padding: 100px;
     border: 100px;
+    background-color:#D1EEEE	;
 }
 
 p{
@@ -19,7 +20,7 @@ li {
 
 h1{
         text-align: left;
-        color: blue;
+        color: navy;
         font-size: 40px;
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }

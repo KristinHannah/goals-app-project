@@ -36,7 +36,7 @@ class Api::V1::GoalsController < ApplicationController
   private 
 
   def goal_params 
-    params.require(:goal).permit(:name, :category, :user_id)
+    params.require(:goal).permit(:name, :category)
   end 
 
 end
