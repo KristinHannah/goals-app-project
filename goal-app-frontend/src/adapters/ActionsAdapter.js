@@ -56,11 +56,9 @@ class ActionsAdapter {
     }
 
     deleteAction(id) {
-
         return fetch(`${this.baseUrl}/${id}`, {
             method: 'DELETE'
         })
-
     }
 
 }

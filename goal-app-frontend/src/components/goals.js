@@ -91,9 +91,12 @@ class Goals {
 
     updateNameOrDeleteGoal(newValue, id) {
         const idofG = parseInt(id)
-        if (newValue === ' ' || newValue === '&nbsp;' || newValue === '') {
+        if (newValue === ' ' || newValue === '&nbsp;' || newValue === '' || newValue === '&nbsp;&nbsp;') {
 
             if (this.confirmDelete() === true) {
+                //need to delete all of a goals actions
+                const g = this.goals.find(item => item.id === idofG)
+                g.actions = []
                 const removeIndex = this.goals.map(function (item) { return item.id; }).indexOf(idofG);
                 this.goals.splice(removeIndex, 1);
                 this.adapter.deleteGoal(id)
@@ -115,6 +118,9 @@ class Goals {
         const idofG = parseInt(id)
         if (newValue === ' ' || newValue === '&nbsp;' || newValue === '') {
             if (this.confirmDelete() === true) {
+                //needs to delete all of a goals actions 
+                const g = this.goals.find(item => item.id === idofG)
+                g.actions = []
                 const removeIndex = this.goals.map(function (item) { return item.id; }).indexOf(idofG);
                 this.goals.splice(removeIndex, 1);
                 this.adapter.deleteGoal(id)
@@ -152,12 +158,12 @@ class Goals {
                 actionToUpdate.name = newAction.name
                 this.render()
             })
-            this.actionsAdapter.updateActionDate(actionDate, id).then(newAction => {
-                const goalOfAction = this.goals.find(x => x.id === goal_id)
-                const actionToUpdate = goalOfAction.actions.find(x => x.id === id)
-                actionToUpdate.date = newAction.date
-                this.render()
-            })
+            //  this.actionsAdapter.updateActionDate(actionDate, id).then(newAction => {
+            //      const goalOfAction = this.goals.find(x => x.id === goal_id)
+            //      const actionToUpdate = goalOfAction.actions.find(x => x.id === id)
+            //      actionToUpdate.date = newAction.date
+            //      this.render()
+            //  })
         }
     }
 

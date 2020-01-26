@@ -26,9 +26,9 @@ class Api::V1::GoalsController < ApplicationController
 
   def destroy 
     @goal = Goal.find(params[:id])
-    @goal.delete 
+    Goal.where(id: params[:id]).destroy_all
 
-    render json: {goalId: @goal.id}
+   # render json: {goalId: @goal.id}
   end 
 
 
