@@ -29,7 +29,7 @@ class ActionsAdapter {
     // the following will have issues because of my more than one atts.
     updateActionName(value, id) {
         const newAction = {
-            name: value
+            name: value,
         }
 
         return fetch(`${this.baseUrl}/${id}`, {

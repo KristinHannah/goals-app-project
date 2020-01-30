@@ -46,9 +46,9 @@ class Goals {
         const newValue = li.innerHTML
         const id = li.dataset.id
         if (li.dataset.name === "name") {
-            this.updateNameOrDeleteGoal(newValue, id)
+            this.updateNameGoal(newValue, id)
         } else if (li.dataset.name === "category") {
-            this.updateCatOrDeleteGoal(newValue, id)
+            this.updateCatGoal(newValue, id)
         } else if (li.dataset.name === "action") {
             const goal_id = parseInt(li.dataset.goal_id)
             const actionData = newValue.split('-')
@@ -90,9 +90,11 @@ class Goals {
         //        this.render()
         //      }
         //  } else {
+        debugger
+        const num_action_id = parseInt(id)
         this.actionsAdapter.updateActionName(actionName, id).then(newAction => {
             const goalOfAction = this.goals.find(x => x.id === goal_id)
-            const actionToUpdate = goalOfAction.actions.find(x => x.id === id)
+            const actionToUpdate = goalOfAction.actions.find(x => x.id === num_action_id)
             actionToUpdate.name = newAction.name
             this.render()
         })
@@ -136,7 +138,7 @@ class Goals {
         li.classList.add('editable')
     }
 
-    updateNameOrDeleteGoal(newValue, id) {
+    updateNameGoal(newValue, id) {
         const num_goal_id = parseInt(id)
         //   if (newValue === ' ' || newValue === '&nbsp;' || newValue === '' || newValue === '&nbsp;&nbsp;') {
 
@@ -178,28 +180,14 @@ class Goals {
         }
     }
 
-    updateCatOrDeleteGoal(newValue, id) {
-        const idofG = parseInt(id)
-        if (newValue === ' ' || newValue === '&nbsp;' || newValue === '') {
-            if (this.confirmDelete() === true) {
-                //needs to delete all of a goals actions 
-                const g = this.goals.find(item => item.id === idofG)
-                g.actions = []
-                const removeIndex = this.goals.map(function (item) { return item.id; }).indexOf(idofG);
-                this.goals.splice(removeIndex, 1);
-                this.adapter.deleteGoal(id)
+    updateCatGoal(newValue, id) {
+        const num_goal_id = parseInt(id)
+        this.adapter.updateGoalCategory(newValue, id)
+            .then(goal => {
+                const goaTolUpdate = this.goals.find(x => x.id === num_goal_id)
+                goalToUpdate.category = goal.category
                 this.render()
-            } else {
-                this.render()
-            }
-        } else {
-            this.adapter.updateGoalCategory(newValue, id)
-                .then(goal => {
-                    const goalUpdate = this.goals.find(x => x.id === idofG)
-                    goalUpdate.category = goal.category
-                    this.render()
-                })
-        }
+            })
     }
 
 
