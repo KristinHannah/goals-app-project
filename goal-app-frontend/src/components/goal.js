@@ -33,7 +33,6 @@ class Goal {
     renderLi() {
         const nameId = `new-action-for-${this.id}`
         const dateId = `new-date-for-${this.id}`
-        const goalId = `goal-id-for-${this.id}`
         const classId = `${this.id}`
         const classForGoalName = `goal-name ${this.id}`
         const classForGoalCat = `goal-cat ${this.id}`

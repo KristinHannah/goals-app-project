@@ -152,7 +152,7 @@ class Goals {
         //          this.adapter.deleteGoal(id)
         //          this.render()
         //      } else {
-        //          this.render() //fix variable names, and break out some of these into separate functions, add "x" button, add hover over actions/goals for trash can
+        //          this.render() //fix variable names, and break out some of these into separate functions, adding validation errors, share button
         //     }
         //  } else {
         this.adapter.updateGoalName(newValue, id)
