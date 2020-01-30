@@ -58,7 +58,7 @@ class Goal {
             <input type='submit' /> 
         </form> </li> </ol>
         <br />
-        <i class="fas fa-trash-alt goal-erase"></i>
+        <p> Delete Goal <i class="fas fa-trash-alt goal-erase" data-id=${this.id}></i> </p>
         </li>
         </ul>
         </li>`

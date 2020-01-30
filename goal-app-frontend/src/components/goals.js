@@ -29,13 +29,12 @@ class Goals {
         })
         this.body.addEventListener('click', (event) => {
             if (event.target.classList.contains('action-erase')) {
-                this.deleteAction(event)
+                this.deleteActionHandler(event)
             }
             else if (event.target.classList.contains('goal-erase')) {
-                this.deleteGoal(event)
+                this.deleteGoalHandler(event)
             }
-        }
-        )
+        })
     }
 
     //main change handling 
@@ -55,7 +54,7 @@ class Goals {
             const actionData = newValue.split('-')
             const actionName = actionData[1]
             const actionDate = actionData[2]
-            this.updateOrDeleteAction(actionName, actionDate, id, goal_id)
+            this.updateAction(actionName, actionDate, id, goal_id)
         }
     }
 
@@ -77,7 +76,7 @@ class Goals {
         })
     }
 
-    updateOrDeleteAction(actionName, actionDate, id, goal_id) {
+    updateAction(actionName, actionDate, id, goal_id) {
         //   if (actionName === ' ' || actionDate === ' ' || actionName === '&nbsp; ' || actionDate === '&nbsp; ') {
         //     if (this.confirmDelete() === true) {
         //        const goalOfAction = this.goals.find(x => x.id === goal_id)
@@ -100,7 +99,7 @@ class Goals {
         //    }
     }
 
-    deleteAction(event) {
+    deleteActionHandler(event) {
         const deleteActionButton = event.target
         const id = deleteActionButton.dataset.id
         const goal_id = parseInt(deleteActionButton.dataset.goal_id)
@@ -138,27 +137,44 @@ class Goals {
     }
 
     updateNameOrDeleteGoal(newValue, id) {
-        const idofG = parseInt(id)
-        if (newValue === ' ' || newValue === '&nbsp;' || newValue === '' || newValue === '&nbsp;&nbsp;') {
+        const num_goal_id = parseInt(id)
+        //   if (newValue === ' ' || newValue === '&nbsp;' || newValue === '' || newValue === '&nbsp;&nbsp;') {
 
-            if (this.confirmDelete() === true) {
-                //need to delete all of a goals actions
-                const g = this.goals.find(item => item.id === idofG)
-                g.actions = []
-                const removeIndex = this.goals.map(function (item) { return item.id; }).indexOf(idofG);
-                this.goals.splice(removeIndex, 1);
-                this.adapter.deleteGoal(id)
+        //      if (this.confirmDelete() === true) {
+        //          //need to delete all of a goals actions
+        //          const g = this.goals.find(item => item.id === idofG)
+        //          g.actions = []
+        //          const removeIndex = this.goals.map(function (item) { return item.id; }).indexOf(idofG);
+        //          this.goals.splice(removeIndex, 1);
+        //          this.adapter.deleteGoal(id)
+        //          this.render()
+        //      } else {
+        //          this.render() //fix variable names, and break out some of these into separate functions, add "x" button, add hover over actions/goals for trash can
+        //     }
+        //  } else {
+        this.adapter.updateGoalName(newValue, id)
+            .then(goal => {
+                const goalUpdate = this.goals.find(x => x.id === num_goal_id)
+                goalUpdate.name = goal.name
                 this.render()
-            } else {
-                this.render() //fix variable names, and break out some of these into separate functions, add "x" button, add hover over actions/goals for trash can
-            }
+            })
+        //   }
+    }
+
+    deleteGoalHandler(event) {
+        const deleteGoalButton = event.target
+        const goal_id = deleteGoalButton.dataset.id
+        const num_goal_id = parseInt(goal_id)
+        if (this.confirmDelete() === true) {
+            //need to delete all of a goals actions
+            const goalToDelete = this.goals.find(item => item.id === num_goal_id)
+            goalToDelete.actions = []
+            const removeIndex = this.goals.map(function (item) { return item.id; }).indexOf(num_goal_id);
+            this.goals.splice(removeIndex, 1);
+            this.adapter.deleteGoal(goal_id)
+            this.render()
         } else {
-            this.adapter.updateGoalName(newValue, id)
-                .then(goal => {
-                    const goalUpdate = this.goals.find(x => x.id === idofG)
-                    goalUpdate.name = goal.name
-                    this.render()
-                })
+            this.render()
         }
     }
 
