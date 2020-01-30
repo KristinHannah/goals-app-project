@@ -35,6 +35,16 @@ h1{
     color: darkgrey;
 }
 
+.action-erase:hover{
+    fill: gray;
+}
+
+.goal-erase:hover{
+    color: gray;
+}
+
+
+
 li.goal-class{
     border: 5px solid darkslateblue;
     padding: 10px;

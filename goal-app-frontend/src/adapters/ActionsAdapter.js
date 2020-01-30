@@ -27,23 +27,10 @@ class ActionsAdapter {
 
 
     // the following will have issues because of my more than one atts.
-    updateActionName(value, id) {
+    updateAction(valueName, valueDate, id) {
         const newAction = {
-            name: value,
-        }
-
-        return fetch(`${this.baseUrl}/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify({ newAction }),
-        }).then(res => res.json())
-    }
-
-    updateActionDate(value, id) {
-        const newAction = {
-            date: value
+            name: valueName,
+            date: valueDate
         }
 
         return fetch(`${this.baseUrl}/${id}`, {

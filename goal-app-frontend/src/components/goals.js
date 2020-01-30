@@ -54,7 +54,7 @@ class Goals {
             const actionData = newValue.split('-')
             const actionName = actionData[1]
             const actionDate = actionData[2]
-            this.updateAction(actionName, actionDate, id, goal_id)
+            this.updateActionHandler(actionName, actionDate, id, goal_id)
         }
     }
 
@@ -76,7 +76,7 @@ class Goals {
         })
     }
 
-    updateAction(actionName, actionDate, id, goal_id) {
+    updateActionHandler(actionName, actionDate, id, goal_id) {
         //   if (actionName === ' ' || actionDate === ' ' || actionName === '&nbsp; ' || actionDate === '&nbsp; ') {
         //     if (this.confirmDelete() === true) {
         //        const goalOfAction = this.goals.find(x => x.id === goal_id)
@@ -92,10 +92,11 @@ class Goals {
         //  } else {
         debugger
         const num_action_id = parseInt(id)
-        this.actionsAdapter.updateActionName(actionName, id).then(newAction => {
+        this.actionsAdapter.updateAction(actionName, actionDate, id).then(newAction => {
             const goalOfAction = this.goals.find(x => x.id === goal_id)
             const actionToUpdate = goalOfAction.actions.find(x => x.id === num_action_id)
             actionToUpdate.name = newAction.name
+            actionToUpdate.date = newAction.date
             this.render()
         })
         //    }
