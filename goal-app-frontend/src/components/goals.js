@@ -8,7 +8,6 @@ class Goals {
         this.fetchAndLoadGoals()
     }
 
-
     initBindingsAndEventListeners() {
         this.goalsContainer = document.getElementById('goals-container')
         this.body = document.querySelector('body')
@@ -28,43 +27,18 @@ class Goals {
                 this.submitActionForm(event)
             }
         })
+        this.body.addEventListener('click', (event) => {
+            if (event.target.className === 'action-erase') {
+                this.deleteAction(event)
+            }
+            else if (event.target.className === 'goal-erase') {
+                this.deleteGoal(event)
+            }
+        }
+        )
     }
 
-    submitActionForm(e) {
-        e.preventDefault()
-
-        const actionGoalId = parseInt(e.target.dataset.id)
-        const actionNameField = document.getElementById(`new-action-for-${actionGoalId}`)
-        const actionDateField = document.getElementById(`new-date-for-${actionGoalId}`)
-        const actionName = actionNameField.value
-        const actionDate = actionDateField.value
-        actionNameField.value = ''
-        actionDateField.value = ''
-        this.actionsAdapter.createAction(actionName, actionDate, actionGoalId).then(newAction => {
-            const goalOfAction = this.goals.find(x => x.id === actionGoalId)
-            goalOfAction.actions.push(new Action(newAction))
-            this.render()
-        })
-    }
-
-    createGoal(e) {
-        e.preventDefault()
-        const nameValue = this.newGoalBody.value
-        const catValue = this.newGoalCat.value
-        this.newGoalBody.value = ''
-        this.newGoalCat.value = ''
-        this.adapter.createGoal(nameValue, catValue).then(goal => {
-            this.goals.push(new Goal(goal))
-            this.render()
-        })
-    }
-
-    handleGoalClick(e) {
-        const li = e.target
-        li.contentEditable = true
-        li.focus()
-        li.classList.add('editable')
-    }
+    //main change handling 
 
     updateGoal(e) {
         const li = e.target
@@ -85,8 +59,82 @@ class Goals {
         }
     }
 
-    confirmDelete() {
-        return confirm('are you sure you want to delete your goal or action?')
+    //Actions 
+
+    submitActionForm(e) {
+        e.preventDefault()
+        const actionGoalId = parseInt(e.target.dataset.id)
+        const actionNameField = document.getElementById(`new-action-for-${actionGoalId}`)
+        const actionDateField = document.getElementById(`new-date-for-${actionGoalId}`)
+        const actionName = actionNameField.value
+        const actionDate = actionDateField.value
+        actionNameField.value = ''
+        actionDateField.value = ''
+        this.actionsAdapter.createAction(actionName, actionDate, actionGoalId).then(newAction => {
+            const goalOfAction = this.goals.find(x => x.id === actionGoalId)
+            goalOfAction.actions.push(new Action(newAction))
+            this.render()
+        })
+    }
+
+    updateOrDeleteAction(actionName, actionDate, id, goal_id) {
+        //   if (actionName === ' ' || actionDate === ' ' || actionName === '&nbsp; ' || actionDate === '&nbsp; ') {
+        //     if (this.confirmDelete() === true) {
+        //        const goalOfAction = this.goals.find(x => x.id === goal_id)
+        //        const actionToUpdate = goalOfAction.actions
+        //        const removeIndex = actionToUpdate.map(function (item) { return item.id; }).indexOf(id);
+        //        actionToUpdate.splice(removeIndex, 1);
+        //        this.actionsAdapter.deleteAction(id)
+        //        this.render()
+        //     }
+        //     else {
+        //        this.render()
+        //      }
+        //  } else {
+        this.actionsAdapter.updateActionName(actionName, id).then(newAction => {
+            const goalOfAction = this.goals.find(x => x.id === goal_id)
+            const actionToUpdate = goalOfAction.actions.find(x => x.id === id)
+            actionToUpdate.name = newAction.name
+            this.render()
+        })
+        //    }
+    }
+
+    deleteAction(event) {
+        const li = e.target
+        const id = li.dataset.id
+        const goal_id = parseInt(li.dataset.goal_id)
+        if (this.confirmDelete() === true) {
+            const goalOfAction = this.goals.find(x => x.id === goal_id)
+            const actionToUpdate = goalOfAction.actions
+            const removeIndex = actionToUpdate.map(function (item) { return item.id; }).indexOf(id);
+            actionToUpdate.splice(removeIndex, 1);
+            this.actionsAdapter.deleteAction(id)
+            this.render()
+        }
+        else {
+            this.render()
+        }
+    }
+
+    //Goals 
+    createGoal(e) {
+        e.preventDefault()
+        const nameValue = this.newGoalBody.value
+        const catValue = this.newGoalCat.value
+        this.newGoalBody.value = ''
+        this.newGoalCat.value = ''
+        this.adapter.createGoal(nameValue, catValue).then(goal => {
+            this.goals.push(new Goal(goal))
+            this.render()
+        })
+    }
+
+    handleGoalClick(e) {
+        const li = e.target
+        li.contentEditable = true
+        li.focus()
+        li.classList.add('editable')
     }
 
     updateNameOrDeleteGoal(newValue, id) {
@@ -102,7 +150,7 @@ class Goals {
                 this.adapter.deleteGoal(id)
                 this.render()
             } else {
-                this.render()
+                this.render() //fix variable names, and break out some of these into separate functions, add "x" button, add hover over actions/goals for trash can
             }
         } else {
             this.adapter.updateGoalName(newValue, id)
@@ -138,34 +186,15 @@ class Goals {
         }
     }
 
-    updateOrDeleteAction(actionName, actionDate, id, goal_id) {
-        if (actionName === ' ' || actionDate === ' ' || actionName === '&nbsp; ' || actionDate === '&nbsp; ') {
-            if (this.confirmDelete() === true) {
-                const goalOfAction = this.goals.find(x => x.id === goal_id)
-                const actionToUpdate = goalOfAction.actions
-                const removeIndex = actionToUpdate.map(function (item) { return item.id; }).indexOf(id);
-                actionToUpdate.splice(removeIndex, 1);
-                this.actionsAdapter.deleteAction(id)
-                this.render()
-            }
-            else {
-                this.render()
-            }
-        } else {
-            this.actionsAdapter.updateActionName(actionName, id).then(newAction => {
-                const goalOfAction = this.goals.find(x => x.id === goal_id)
-                const actionToUpdate = goalOfAction.actions.find(x => x.id === id)
-                actionToUpdate.name = newAction.name
-                this.render()
-            })
-            //  this.actionsAdapter.updateActionDate(actionDate, id).then(newAction => {
-            //      const goalOfAction = this.goals.find(x => x.id === goal_id)
-            //      const actionToUpdate = goalOfAction.actions.find(x => x.id === id)
-            //      actionToUpdate.date = newAction.date
-            //      this.render()
-            //  })
-        }
+
+    //delete 
+
+    confirmDelete() {
+        return confirm('are you sure you want to delete your goal or action?')
     }
+
+
+    //rendering goals 
 
     fetchAndLoadGoals() {
         this.adapter.getGoals()
