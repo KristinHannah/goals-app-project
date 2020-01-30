@@ -28,10 +28,10 @@ class Goals {
             }
         })
         this.body.addEventListener('click', (event) => {
-            if (event.target.className === 'action-erase') {
+            if (event.target.classList.contains('action-erase')) {
                 this.deleteAction(event)
             }
-            else if (event.target.className === 'goal-erase') {
+            else if (event.target.classList.contains('goal-erase')) {
                 this.deleteGoal(event)
             }
         }
@@ -101,9 +101,9 @@ class Goals {
     }
 
     deleteAction(event) {
-        const li = e.target
-        const id = li.dataset.id
-        const goal_id = parseInt(li.dataset.goal_id)
+        const deleteActionButton = event.target
+        const id = deleteActionButton.dataset.id
+        const goal_id = parseInt(deleteActionButton.dataset.goal_id)
         if (this.confirmDelete() === true) {
             const goalOfAction = this.goals.find(x => x.id === goal_id)
             const actionToUpdate = goalOfAction.actions
