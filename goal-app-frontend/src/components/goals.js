@@ -77,20 +77,6 @@ class Goals {
     }
 
     updateActionHandler(actionName, actionDate, id, goal_id) {
-        //   if (actionName === ' ' || actionDate === ' ' || actionName === '&nbsp; ' || actionDate === '&nbsp; ') {
-        //     if (this.confirmDelete() === true) {
-        //        const goalOfAction = this.goals.find(x => x.id === goal_id)
-        //        const actionToUpdate = goalOfAction.actions
-        //        const removeIndex = actionToUpdate.map(function (item) { return item.id; }).indexOf(id);
-        //        actionToUpdate.splice(removeIndex, 1);
-        //        this.actionsAdapter.deleteAction(id)
-        //        this.render()
-        //     }
-        //     else {
-        //        this.render()
-        //      }
-        //  } else {
-        debugger
         const num_action_id = parseInt(id)
         this.actionsAdapter.updateAction(actionName, actionDate, id).then(newAction => {
             const goalOfAction = this.goals.find(x => x.id === goal_id)
@@ -99,7 +85,6 @@ class Goals {
             actionToUpdate.date = newAction.date
             this.render()
         })
-        //    }
     }
 
     deleteActionHandler(event) {
@@ -141,27 +126,12 @@ class Goals {
 
     updateNameGoal(newValue, id) {
         const num_goal_id = parseInt(id)
-        //   if (newValue === ' ' || newValue === '&nbsp;' || newValue === '' || newValue === '&nbsp;&nbsp;') {
-
-        //      if (this.confirmDelete() === true) {
-        //          //need to delete all of a goals actions
-        //          const g = this.goals.find(item => item.id === idofG)
-        //          g.actions = []
-        //          const removeIndex = this.goals.map(function (item) { return item.id; }).indexOf(idofG);
-        //          this.goals.splice(removeIndex, 1);
-        //          this.adapter.deleteGoal(id)
-        //          this.render()
-        //      } else {
-        //          this.render() //fix variable names, and break out some of these into separate functions, adding validation errors, share button
-        //     }
-        //  } else {
         this.adapter.updateGoalName(newValue, id)
             .then(goal => {
                 const goalUpdate = this.goals.find(x => x.id === num_goal_id)
                 goalUpdate.name = goal.name
                 this.render()
             })
-        //   }
     }
 
     deleteGoalHandler(event) {
@@ -169,7 +139,6 @@ class Goals {
         const goal_id = deleteGoalButton.dataset.id
         const num_goal_id = parseInt(goal_id)
         if (this.confirmDelete() === true) {
-            //need to delete all of a goals actions
             const goalToDelete = this.goals.find(item => item.id === num_goal_id)
             goalToDelete.actions = []
             const removeIndex = this.goals.map(function (item) { return item.id; }).indexOf(num_goal_id);

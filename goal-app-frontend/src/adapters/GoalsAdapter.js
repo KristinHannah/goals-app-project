@@ -22,8 +22,6 @@ class GoalsAdapter {
         }).then(res => res.json())
     }
 
-
-    // the following will have issues because of my more than one atts.
     updateGoalName(value, id) {
         const goal = {
             name: value
